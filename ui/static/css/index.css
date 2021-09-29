@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper{
+    padding-left: 0;
+    background-color: #efefef;
+    height: 100vh;
+}
+.atag:hover{
+    background-color: transparent;
+    text-decoration: none;
+    color: white;
+}
+.atag{
+    color: darkblue;
+}
+.post-box {
+    height: 550px;
+    width: 400px;
+}
+.two {
+    height: 550px;
+}
+.for {
+    height: 550px;
+}
+
+
+.big-cont{
+    position: relative;
+    width: 100%;
+    height: 600px;
+    padding-top: 20px;
+}
+.cont2{
+    width: 100%;
+    height: 340px;
+    position: relative;
+    bottom: 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.cont1{
+    height: 200px;
+    width: 100%;
+    position: relative;
+}
+input.title{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 220px;
+    outline: none;
+    border: none;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    text-indent: 30px;
+}
+.top-btn{
+    margin-left: 30px;
+    position: absolute;
+    z-index: 3;
+}
+::placeholder {
+    color: #717171;
+    font-size: 2rem;
+    font-family: 'Alfa Slab One', cursive;
+}
+.bgnil{
+    background-color: #efefef;
+}
+.bd{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+.save{
+    width: 305px;
+    height: 70px;
+    position: absolute;
+    bottom: 30px;
+    margin-left: 240px;
+}
+
+/* Blog */
+.uswag{
+    width: 65%;
+    height: 800px;
+    margin: 0 auto;
+    display: flex;
+}
+.bgnil{
+    margin-bottom: 14px;
+}

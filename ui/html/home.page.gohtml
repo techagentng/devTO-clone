@@ -1,0 +1,51 @@
+{{template "base"}}
+
+{{define "title"}} Home{{end}}
+
+{{/*{{define "main"}}*/}}
+{{/*    <nav class="navbar navbar-expand-lg navbar-light bg-light">*/}}
+{{/*        <a class="navbar-brand" href="/">DECAGON</a>*/}}
+{{/*        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">*/}}
+{{/*            <span class="navbar-toggler-icon"></span>*/}}
+{{/*        </button>*/}}
+
+{{/*        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">*/}}
+
+{{/*            <form class="form-inline my-2 my-lg-0 ">*/}}
+{{/*                <button class="btn btn-outline-primary mr-sm-4 my-sm-0" type="submit"><a class="atag" href="/blog">View Post</a></button>*/}}
+{{/*            </form>*/}}
+{{/*        </div>*/}}
+{{/*    </nav>*/}}
+
+
+    <div class="wrapper">
+        <form method="POST" action="/process">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 two"></div>
+                    <div class="col-md-6 post-box">
+                        <div class="big-cont">
+                            <div class="cont1">
+
+                                <div class="input-big">
+                                    <button type="button" class="btn top-btn btn-outline-secondary">Add a cover image</button>
+                                    <input placeholder="New post title here..." type="text" name="title" class="title">
+                                </div>
+                            </div>
+                            <div class="cont2">
+                                <input type="text" name="body" class="bd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 for"></div>
+                </div>
+
+
+                <div class="save">
+                    <button type="submit" name="submit" class="btn btn-lg btn-primary"> Publish</button>
+                    <button type="button" class="btn btn-lg btn-link">Save draft</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{{/*{{end}}*/}}
