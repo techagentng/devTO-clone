@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/techagentn/cto/model"
@@ -10,14 +11,15 @@ import (
 )
 
 type Post struct {
-	userId string
+	UserId string
 	Title string
 	Body string
 }
 
 var templateFiles = []string{
 	 "./ui/html/home.page.gohtml",
-	 "./ui/html/base.layout.gohtml",
+	 "./ui/html" +
+	 	"/base.layout.gohtml",
 	"./ui/html/footer.partial.gohtml",
 	//"./ui/html/main.page.gohtml.gohtml",
 
@@ -47,16 +49,18 @@ func (app *application) home(w http.ResponseWriter, r * http.Request){
 
 
 func (b *Post) GetAllContents()(blogPosts  []Post, err error)   {
-	rows, err := model.Db.Query(`SELECT userId,Title,Body FROM tech`)
+	rows, err := model.Db.Query(`SELECT UserId,Title,Body FROM posts`)
 	if err != nil{
 		return
 	}
 	for rows.Next(){
 		bp := Post{}
-		err = rows.Scan(&bp.userId,&bp.Title,&bp.Body)
+		err = rows.Scan(&bp.UserId,&bp.Title,&bp.Body)
 		if err != nil{
 			return
 		}
+		fmt.Println(bp.UserId)
+		fmt.Println(bp.Title)
 		blogPosts = append(blogPosts,bp)
 	}
 	rows.Close()
@@ -88,12 +92,12 @@ func (app *application) blog(w http.ResponseWriter, r * http.Request){
 	err = ts.Execute(w, users)
 }
 func (b *Post) CreateBlog()  {
-	stmt, err := model.Db.Prepare(`INSERT INTO tech(userId,Title, Body) VALUES($1, $2, $3)`)
+	stmt, err := model.Db.Prepare(`INSERT INTO posts (UserId, Title, Body) VALUES($1, $2, $3)`)
 	defer stmt.Close()
 	if err != nil{
 		log.Panicln(err.Error())
 	}
-	_, err = stmt.Exec(b.userId, b.Title, b.Body)
+	_, err = stmt.Exec(b.UserId, b.Title, b.Body)
 	if err != nil {
 		panic(err.Error())
 		//http.Error(w, http.StatusText(500), http.StatusInternalServerError)
@@ -118,7 +122,7 @@ func (app *application) processPForm(w http.ResponseWriter, r * http.Request){
 	r.ParseForm()
 	//Store data
 	blogPost := &Post{
-		userId: uuid.New().String(),
+		UserId: uuid.New().String(),
 		Title: r.Form.Get("title"),
 		Body: r.Form.Get("body"),
 	}
@@ -131,22 +135,17 @@ func (app *application) processPForm(w http.ResponseWriter, r * http.Request){
 }
 
 func (b *Post) Delete(val string) (err error) {
-	_, err = model.Db.Query(`delete from tech where userId = $1`,val)
+
+	_, err = model.Db.Query(`delete from posts where userId = $1`,val)
 	return err
 }
 
-func (b *Post) Del(val string) (err error) {
-	_, err = model.Db.Query(`delete from tech where userId = $1`,val)
-	return err
-}
 
 func (app *application) Delete(w http.ResponseWriter, r *http.Request)  {
 	blog := Post{}
-	id := chi.URLParam(r,"userId")
-
-	err := blog.Del(id)
+	id := chi.URLParam(r,"UserId")
+	err := blog.Delete(id)
 	app.infoLog.Printf(id)
-
 	if err != nil {
 		app.serverError(w, err)
 		return

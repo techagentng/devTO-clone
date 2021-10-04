@@ -16,7 +16,7 @@ func (app *application) routes() *chi.Mux{
 	mux.Get("/", app.home)
 	mux.Post("/process", app.processPForm)
 	mux.Get("/blog", app.blog)
-	mux.Get("/{id}/delete", app.Delete)
+	mux.Get("/blog/{UserId}", app.Delete)
 	//staticServer := http.FileServer(http.Dir("./ui/static"))
 	//mux.Handle("/static/", http.StripPrefix("/static", staticServer))
 

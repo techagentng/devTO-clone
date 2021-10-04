@@ -11,7 +11,7 @@ const (
 	host = "localhost"
 	port = 5430
 	user = "decagon"
-	dbname = "firstdb"
+	dbname = "tech"
 
 )
 
